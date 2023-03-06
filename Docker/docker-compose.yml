@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  pdf2csv:
+    build: .
+    image: pdf2csv
+    hostname: pdf2csv
+    container_name: pdf2csv
+    stdin_open: true
+    tty: true
