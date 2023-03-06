@@ -1,4 +1,3 @@
-# flipcat
-エンジニアリングデザイン演習
+# Coopyotei2csv
 
-![cat](https://user-images.githubusercontent.com/36100321/149067304-8106da77-299a-4c97-8e63-23f1030330d7.jpg)
+生協の営業時間を取得し，csvに変換
