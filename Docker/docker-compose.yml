@@ -7,3 +7,5 @@ services:
     container_name: pdf2csv
     stdin_open: true
     tty: true
+    volumes:
+      - ../../Coopyotei2csv:/home/Coopyotei2csv/
