@@ -28,20 +28,21 @@ def webpdf_to_csv():
     df2=df.iloc[0:,[2,3]]
 
 
-    for j in range(2):
-        for i in range(len(df2)):
-            if df2.iloc[i,j]=="休業":
-                df2.iloc[i,j]="-1:-1~-1:-1"
-            #else:
-                #全角文字を半角に変換
-                #text=df2.iloc[i,j]
-                #df2.iloc[i,j]=unicodedata.normalize("NFKC", text)
-
     out_list=[]
-
     for k in range(len(df2)):
         out_list.append(re.split('[:~]',df2.iloc[k,0])+re.split('[:~]',df2.iloc[k,1]))
     df3=pd.DataFrame(out_list)
+
+    # Delete all but number & exception handling
+    for i in range(len(df3)):
+        for j in range(8):
+            df3.iat[i,j] = re.sub(r'\D', '', str(df3.iat[i,j]))
+
+            if df3.iat[i,j]=="":
+                df3.iat[i,j] = "-1"
+            elif int(df3.iat[i,j]) > 60:
+                df3.iat[i,j] = "-2"
+            
     return df3
 
 dt_now = datetime.datetime.now()
@@ -54,7 +55,7 @@ else:
     decade=""
 
 file_path=output_file_path+str(year)+decade+str(month)+".csv"
-print(os.path.dirname(__file__))
+print('output: '+ str(file_path))
 #csvに変換して出力
 webpdf_to_csv().to_csv(file_path, index = False,header=False)
 
